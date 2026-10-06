@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    {{ request }}
+    {% for post in posts %}
+
+    <p>{{post.title}}</p>
+
+    {% endfor %}
 </body>
 </html>

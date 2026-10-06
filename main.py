@@ -1,10 +1,14 @@
 from tempfile import template
 
-from fastapi import FastAPI,Request
+from fastapi import FastAPI, Request, Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 from starlette.responses import FileResponse, HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+
+import models
+from database import engine, get_db
 
 
 class post(BaseModel):
@@ -14,10 +18,13 @@ class post(BaseModel):
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="static")
+models.Base.metadata.create_all(bind=engine)
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
-    return templates.TemplateResponse(request,"index.html",{"request":request})
+async def root(request: Request, db: Session = Depends(get_db)):
+    posts = db.query(models.Post).all()
+
+    return templates.TemplateResponse(request,"index.html",{"request":request,"posts":posts})
 
 @app.get("/{post_id}", response_class=HTMLResponse)
 async def root(request: Request, post_id: int):
