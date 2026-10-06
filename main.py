@@ -2,6 +2,7 @@ from tempfile import template
 
 from fastapi import FastAPI, Request, Depends
 from pydantic import BaseModel
+from rich_toolkit import form
 from sqlalchemy.orm import Session
 from starlette.responses import FileResponse, HTMLResponse
 from starlette.staticfiles import StaticFiles
@@ -47,6 +48,27 @@ async def newpost(request: Request, db: Session = Depends(get_db)):
     db.commit()
     return templates.TemplateResponse(request,"index.html",{"request":request})
 
+@app.get("/delete/{post_id}", response_class=HTMLResponse)
+async def delete(request: Request, post_id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == int(post_id)).first()
+    db.delete(post)
+    db.commit()
+    return templates.TemplateResponse(request,"index.html",{"request":request})
+
+@app.get("/update/{post_id}", response_class=HTMLResponse)
+def newpost(request: Request, post_id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == post_id)
+    return templates.TemplateResponse(request,"update_post.html",{"request":request,"post": post})
+
+@app.post("/update/{post_id}", response_class=HTMLResponse)
+async def update(request: Request, post_id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+    form = await request.form()
+    post.title = form["title"]
+    post.text = form["text"]
+    db.add(post)
+    db.commit()
+    return templates.TemplateResponse(request,"index.html",{"request":request})
 
 
 

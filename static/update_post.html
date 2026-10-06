@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Post</title>
+</head>
+<body>
+
+    <form method="post">
+
+        <label for="title">Titulo:</label>
+        <input type="text" id="title" name="title" value="{{post.title}}" required>
+
+        <br><br>
+
+        <label for="text">Texto:</label>
+        <textarea id="text" name="text" value="{{post.text}}" required></textarea>
+
+        <br><br>
+
+        <button type="submit">Atualizar Post</button>
+
+    </form>
+
+</body>
+</html>
+```
