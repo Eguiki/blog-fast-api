@@ -27,8 +27,27 @@ async def root(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse(request,"index.html",{"request":request,"posts":posts})
 
 @app.get("/{post_id}", response_class=HTMLResponse)
-async def root(request: Request, post_id: int):
-    return templates.TemplateResponse(request,"post.html",{"id":post_id})
+async def root(request: Request, post_id: int,db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    return templates.TemplateResponse(request,"post.html",{"post":post})
+
+@app.get("/newpost/", response_class=HTMLResponse)
+def newpost(request: Request):
+    return templates.TemplateResponse(request,"create_post.html",{"request":request})
+
+@app.post("/newpost/", response_class=HTMLResponse)
+async def newpost(request: Request, db: Session = Depends(get_db)):
+    form = await request.form()
+
+    post = models.Post()
+    post.title = form["title"]
+    post.text = form["text"]
+    db.add(post)
+    db.commit()
+    return templates.TemplateResponse(request,"index.html",{"request":request})
+
+
 
 
 @app.get("/hello/{name}")
