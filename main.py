@@ -1,8 +1,10 @@
 from tempfile import template
 
+from starlette.exceptions import HTTPException as StarletteHTTPException, HTTPException
 from fastapi import FastAPI, Request, Depends
 from pydantic import BaseModel
 from rich_toolkit import form
+from sqlalchemy import null
 from sqlalchemy.orm import Session
 from starlette.responses import FileResponse, HTMLResponse, RedirectResponse
 from starlette.staticfiles import StaticFiles
@@ -27,9 +29,12 @@ async def root(request: Request, db: Session = Depends(get_db)):
 
     return templates.TemplateResponse(request,"index.html",{"request":request,"posts":posts})
 
-@app.get("/{post_id}", response_class=HTMLResponse)
+@app.get("/viewpost/{post_id}", response_class=HTMLResponse)
 async def root(request: Request, post_id: int,db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    if post is None:
+        raise HTTPException(status_code=404, detail="Post not found")
 
     return templates.TemplateResponse(request,"post.html",{"post":post})
 
@@ -70,6 +75,10 @@ async def update(request: Request, post_id: int, db: Session = Depends(get_db)):
     db.add(post)
     db.commit()
     return RedirectResponse('/', status_code=303)
+
+@app.exception_handler(404)
+async def not_found(request: Request, exc: HTTPException) -> RedirectResponse:
+    return templates.TemplateResponse(request,"er_404.html",{"request":request},status_code=404)
 
 
 
