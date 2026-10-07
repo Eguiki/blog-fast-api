@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, Depends
 from pydantic import BaseModel
 from rich_toolkit import form
 from sqlalchemy.orm import Session
-from starlette.responses import FileResponse, HTMLResponse
+from starlette.responses import FileResponse, HTMLResponse, RedirectResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
@@ -46,14 +46,15 @@ async def newpost(request: Request, db: Session = Depends(get_db)):
     post.text = form["text"]
     db.add(post)
     db.commit()
-    return templates.TemplateResponse(request,"index.html",{"request":request})
+
+    return RedirectResponse('/', status_code=303)
 
 @app.get("/delete/{post_id}", response_class=HTMLResponse)
 async def delete(request: Request, post_id: int, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == int(post_id)).first()
     db.delete(post)
     db.commit()
-    return templates.TemplateResponse(request,"index.html",{"request":request})
+    return RedirectResponse('/', status_code=303)
 
 @app.get("/update/{post_id}", response_class=HTMLResponse)
 def newpost(request: Request, post_id: int, db: Session = Depends(get_db)):
@@ -68,7 +69,7 @@ async def update(request: Request, post_id: int, db: Session = Depends(get_db)):
     post.text = form["text"]
     db.add(post)
     db.commit()
-    return templates.TemplateResponse(request,"index.html",{"request":request})
+    return RedirectResponse('/', status_code=303)
 
 
 
