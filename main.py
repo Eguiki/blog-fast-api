@@ -58,7 +58,7 @@ async def delete(request: Request, post_id: int, db: Session = Depends(get_db)):
 
 @app.get("/update/{post_id}", response_class=HTMLResponse)
 def newpost(request: Request, post_id: int, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == post_id)
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
     return templates.TemplateResponse(request,"update_post.html",{"request":request,"post": post})
 
 @app.post("/update/{post_id}", response_class=HTMLResponse)

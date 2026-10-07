@@ -1,28 +1,65 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Novo Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novo Post - Meu Blog</title>
+
+    <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
-    <form method="post">
+    <main class="container">
 
-        <label for="title">Título:</label>
-        <input type="text" id="title" name="title" required>
+        <section class="form-container">
 
-        <br><br>
+            <header class="form-header">
+                <h1>Criar novo post</h1>
+                <p>Compartilhe uma nova publicação no blog.</p>
+            </header>
 
-        <label for="text">Texto:</label>
-        <textarea id="text" name="text" required></textarea>
+            <form method="post">
 
-        <br><br>
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Digite o título do post"
+                        required
+                    >
+                </div>
 
-        <button type="submit">Criar Post</button>
+                <div class="form-group">
+                    <label for="text">Texto</label>
+                    <textarea
+                        id="text"
+                        name="text"
+                        placeholder="Escreva o conteúdo do seu post..."
+                        required
+                    ></textarea>
+                </div>
 
-    </form>
+                <div class="form-actions">
+
+                    <a class="back-link" href="/">
+                        ← Voltar
+                    </a>
+
+                    <button type="submit">
+                        Criar Post
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
-```

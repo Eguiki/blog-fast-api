@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+/* =========================
+   PÁGINA INICIAL
+   ========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.header p {
+    font-size: 17px;
+    color: #6b7280;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.post-card {
+    display: block;
+    background: white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.post-card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.post-card span {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.new-post {
+    display: block;
+    width: fit-content;
+    margin: 35px auto 0;
+    padding: 13px 22px;
+    background: #111827;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.new-post:hover {
+    background: #374151;
+    transform: translateY(-2px);
+}
+
+.empty {
+    background: white;
+    text-align: center;
+    padding: 45px 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.empty h2 {
+    margin-bottom: 10px;
+}
+
+.empty p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   PÁGINA DO POST
+   ========================= */
+
+.post-detail {
+    background: white;
+    padding: 45px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.post-header {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.post-header h1 {
+    font-size: 36px;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.post-content {
+    min-height: 180px;
+    color: #374151;
+    font-size: 17px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn {
+    padding: 11px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.btn-update {
+    background: #111827;
+    color: white;
+}
+
+.btn-update:hover {
+    background: #374151;
+}
+
+.btn-delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.btn-delete:hover {
+    background: #fecaca;
+}
+
+.back-link {
+    margin-left: auto;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    color: #111827;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+        padding: 40px 0;
+    }
+
+    .header h1 {
+        font-size: 34px;
+    }
+
+    .post-card {
+        padding: 20px;
+    }
+
+    .post-detail {
+        padding: 25px;
+    }
+
+    .post-header h1 {
+        font-size: 28px;
+    }
+
+    .post-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        text-align: center;
+    }
+
+    .back-link {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 8px;
+    }
+}
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
+
+.form-container {
+    background: white;
+    padding: 45px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-header {
+    margin-bottom: 35px;
+}
+
+.form-header h1 {
+    font-size: 34px;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #111827;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #111827;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 220px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.form-actions .back-link {
+    margin-left: 0;
+}
+
+.form-actions button {
+    margin-left: auto;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.form-actions button:hover {
+    background: #374151;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+
+    .form-container {
+        padding: 25px;
+    }
+
+    .form-header h1 {
+        font-size: 28px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 18px;
+        align-items: stretch;
+    }
+
+    .form-actions button {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .form-actions .back-link {
+        text-align: center;
+    }
+}

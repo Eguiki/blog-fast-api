@@ -1,27 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Novo Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atualizar Post - Meu Blog</title>
+
+    <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
-    <form method="post">
+    <main class="container">
 
-        <label for="title">Titulo:</label>
-        <input type="text" id="title" name="title" value="{{post.title}}" required>
+        <section class="form-container">
 
-        <br><br>
+            <header class="form-header">
+                <h1>Atualizar post</h1>
+                <p>Faça as alterações que desejar na publicação.</p>
+            </header>
 
-        <label for="text">Texto:</label>
-        <textarea id="text" name="text" value="{{post.text}}" required></textarea>
+            <form method="post">
 
-        <br><br>
+                <div class="form-group">
+                    <label for="title">Título</label>
 
-        <button type="submit">Atualizar Post</button>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value="{{ post.title }}"
+                        required
+                    >
+                </div>
 
-    </form>
+                <div class="form-group">
+                    <label for="text">Texto</label>
+
+                    <textarea
+                        id="text"
+                        name="text"
+                        required
+                    >{{ post.text }}</textarea>
+                </div>
+
+                <div class="form-actions">
+
+                    <a class="back-link" href="/{{ post.id }}">
+                        ← Voltar
+                    </a>
+
+                    <button type="submit">
+                        Atualizar Post
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
-```
