@@ -11,6 +11,7 @@ from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
 import models
+from api import router
 from database import engine, get_db
 
 
@@ -19,6 +20,7 @@ class post(BaseModel):
     text: str
 
 app = FastAPI()
+app.include_router(router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="static")
 models.Base.metadata.create_all(bind=engine)
