@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.future import engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-SQLALCHEMY_DATABASE_URI = "postgresql://erick:erick@localhost/dba"
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:erick@localhost:5433/dba"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 
